@@ -8,3 +8,14 @@ img{
     border:3px solid rgb(14, 113, 179);
 }
 
+.scifi {
+    color: rgba(121, 8, 8, 0.8);
+}
+
+.accion{
+    color: rgba(112, 4, 155, 0.8);
+} 
+
+.comedia{
+    color: rgba(7, 104, 44, 0.8);
+} 

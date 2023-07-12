@@ -4,8 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Hola React!</title>
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
   <link rel="stylesheet" href="estilo.css">
 
+  
   <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -13,9 +17,16 @@
 
 </head>
 
-<body>
+<body onload="generarRandom()">
   <!-- En este div mostraremos contenido-->
-  <div id="contenido"></div>
+  <div class="container" style="padding-top: 5%;">
+    <div class="row">
+      <div class="col-lg-6" id="contenido"></div>
+      <div class="col-lg-6">
+        <img src="" id="imagen" />
+      </div>
+  </div>
+</div>
 
   <script type="text/babel">
     // Tenemos un listado de películas
@@ -32,12 +43,42 @@
     // Deben listarse las películas, con un color de texto diferente para cada género
     // Además debemos mostrar un poster al azar de la lista de peliculas.
     // Al ser al azar, el poster podrá cambiar cada vez que refrescamos la página.
-        
     
+
+    const Pelicula = ({id,titulo,genero}) => 
+      <li key={id} className={genero}>
+        <h2>{titulo} - {genero} </h2>
+      </li>
+
+    const ListaPeliculas = () =>
+      <div>
+        <h1>peliculas</h1>
+        <ul>
+          {peliculas.map(Pelicula)}
+        </ul>
+      </div>
+
+    const elementoPelis = (
+      <ListaPeliculas />
+    )
     // Luego definimos el root para renderizar allí contenido
     const root = ReactDOM.createRoot(document.getElementById('contenido'));
     // Renderizamos con la siguiente sentencia (habría que definir antes qué tiene "elementoPelis")
     root.render(elementoPelis);
+    
+    function generarRandom(){
+      const randomNumberInRange = (min, max) =>
+       Math.floor(Math.random() * (max - min)) + min;
+       const random = randomNumberInRange(0,4)
+      const url="https://www.omdbapi.com/?apikey=5ab2d3&t="+peliculas[random].titulo
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            document.getElementById("imagen").src=data.Poster
+        });
+  }
+    // randomNumberInRange(80,900) 583
 
 
    
