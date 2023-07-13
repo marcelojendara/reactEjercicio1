@@ -20,12 +20,7 @@
 <body onload="generarRandom()">
   <!-- En este div mostraremos contenido-->
   <div class="container" style="padding-top: 5%;">
-    <div class="row">
-      <div class="col-lg-6" id="contenido"></div>
-      <div class="col-lg-6">
-        <img src="" id="imagen" />
-      </div>
-  </div>
+    <div id="contenido"></div>
 </div>
 
   <script type="text/babel">
@@ -51,12 +46,18 @@
       </li>
 
     const ListaPeliculas = () =>
-      <div>
+    <div  className="row">
+      <div className="col">
         <h1>peliculas</h1>
-        <ul>
+        <ul className="form-control">
           {peliculas.map(Pelicula)}
         </ul>
       </div>
+        <div className="col">
+          <img src="" id="imagen" />
+        </div>
+      </div>
+      
 
     const elementoPelis = (
       <ListaPeliculas />
@@ -69,7 +70,7 @@
     function generarRandom(){
       const randomNumberInRange = (min, max) =>
        Math.floor(Math.random() * (max - min)) + min;
-       const random = randomNumberInRange(0,4)
+       const random = randomNumberInRange(0,5)
       const url="https://www.omdbapi.com/?apikey=5ab2d3&t="+peliculas[random].titulo
       fetch(url)
         .then(response => response.json())
