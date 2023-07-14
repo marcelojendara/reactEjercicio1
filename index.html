@@ -70,12 +70,12 @@
     function generarRandom(){
       const randomNumberInRange = (min, max) =>
        Math.floor(Math.random() * (max - min)) + min;
-       const random = randomNumberInRange(0,5)
+       const random = randomNumberInRange(0,6)
       const url="https://www.omdbapi.com/?apikey=5ab2d3&t="+peliculas[random].titulo
       fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            //console.log(data)
             document.getElementById("imagen").src=data.Poster
         });
   }
